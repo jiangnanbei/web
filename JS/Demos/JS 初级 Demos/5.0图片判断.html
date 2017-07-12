@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<img src="images/1.jpg" id="img1">
+
+	<script type="text/javascript">
+		var oImg=document.getElementById('img1');
+
+		var onOff=true;//这个就是你创造的条件
+		               
+		oImg.onclick=function(){
+			//当if里面没有条件可以填时，这个时候你要学会创造条件
+			if(onOff){
+				oImg.src='images/2.jpg';
+				onOff=false;
+			}else{
+				oImg.src='images/1.jpg';
+				onOff=true;
+			}
+			
+		}
+	</script>
+</body>
+</html>

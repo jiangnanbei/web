@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		div,input,ul,li{margin: 0;padding: 0;}
+		ul{list-style: none;}
+		#container{width: 1000px;height: 100%;margin: 50px auto;text-align: center;}
+		.clear:after{content: "";display: block;clear: both;}
+        .clear{*zoom:1;}
+		#container ul{border: 1px solid;}
+		#container ul li{float: left;margin-left: 10px;background-color: yellow;display: block;}
+	</style>
+</head>
+<body>
+<div id="container">
+	<input type="text" id="input">
+	<input type="button" value="左侧入" id="left-in" class="btn">
+	<input type="button" value="右侧入" id="right-in" class="btn">
+	<input type="button" value="左侧出" id="left-out" class="btn">
+	<input type="button" value="右侧出" id="right-out" class="btn">
+	<input type="button" value="排序" id="sort" class="btn">
+	
+	<ul id="display" class="clear"></ul>
+</div>
+
+<script type="text/javascript">
+	var doc = document;
+	var oLi = doc.createElement('li');
+
+	var $ = function(id){
+ 		return "string" == typeof id ? doc.getElementById(id) : id;
+	}
+
+	function queue(obj,operation){
+
+		obj.onclick = function(){
+			var newLi = oLi.cloneNode(oLi);
+			// 只要涉及到输入都要进行合法性检查
+			if ( $("input").value == '' ) {
+				alert("please input number!")
+				// 限制输入数字的范围
+			} else if ( $("input").value < 10 || $("input").value > 100 ) {
+				alert( "please input number between 10 and 100" );
+			} else if( !isNaN($("input").value) ) {
+				newLi.innerText = $("input").value;
+				newLi.style.height = $("input").value + 'px';
+			} else {
+				alert("invalid input!");
+			}
+			
+			// 限制输入的长度
+			if( display.children.length > 59) {
+				alert( "the length of queue is 60" );
+				return false;
+			}
+
+			switch (operation){
+				case 'left-in':
+					$("display").insertBefore(newLi,$("display").children[0]);
+					break;
+				case 'right-in':
+					$("display").appendChild(newLi);
+					break;
+				case 'left-out':
+					alert($("display").children[0].innerHTML);
+					$("display").removeChild($("display").children[0]);
+					break;
+				case 'right-out':
+					alert($("display").lastChild.innerHTML);
+					$("display").removeChild($("display").lastChild);
+					break;
+				default :
+					alert("wrong paramas");
+			}
+		}
+
+	}
+
+	
+	// 跨浏览起的事件兼容代码
+	var EventUtil = {
+        addHandler : function( element, type, handler ) {
+            if ( element.addEventListener ) {
+                element.addEventListener( type, handler, false);
+            } else if ( element.attachEvent ) {
+                element.attachEvent( "on" + type, handler );
+            } else {
+                element[ "on" + type ] = handler;
+            }
+        },
+
+        removeHandler : function( element, type, handler ) {
+            if ( element.removeEventListener ) {
+                element.removeEventListener( type, handler, false);
+            } else if ( element.detachEvent ) {
+                element.detachEvent( "on" + type, handler );
+            } else {
+                element[ "on" + type ] = null;
+            }
+        }
+    }
+
+    // 定义事件句柄，点击队列中任何一个元素，则钙元素被从队列中移除
+    var handler1 = function() {
+		if (event.target.nodeName.toLowerCase() == "li") {
+            this.removeChild(event.target);
+        }
+	}
+
+	// 用冒泡法实现排序功能
+	var handler2 = function() {
+		for ( var i = 0, len = $("display").children.length; i < len; i++ ) {
+			for ( var j = 0, len = $("display").children.length-1; j < len; j++ ) {
+				if ( Number( $("display").children[j].innerText ) > Number( $("display").children[j+1].innerText ) ) {
+					var agent = $("display").children[j].innerText ;
+					$("display").children[j].innerText  = $("display").children[j+1].innerText;
+					$("display").children[j+1].innerText = agent;
+				}
+			}
+		}
+	}
+
+	// 函数调用
+	queue($("left-in"),'left-in');
+	queue($("right-in"),'right-in');
+	queue($("left-out"),'left-out');
+	queue($("right-out"),'right-out');
+	EventUtil.addHandler( display, "click", handler1 );
+	EventUtil.addHandler( sort, "click", handler2 );
+</script>
+</body>
+</html>

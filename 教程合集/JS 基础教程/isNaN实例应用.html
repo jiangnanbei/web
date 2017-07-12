@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<input type="text" name="">
+	<input type="button" value="please input number">
+
+<script type="text/javascript">
+	
+	window.onload=function(){
+		var oInp=document.getElementsByTagName('input');
+		var str='';
+
+		oInp[1].onclick=function(){
+			str=oInp[0].value;
+			//all of the context get from HTML is string,so if you input a number
+			//in the input, you can't judge is number or string by typeof.
+			//so in this situation we can use inNaN.
+			// alert(typeof str);
+			if(isNaN(str)){
+				alert(str+' not is a number');
+			}else{
+				alert(str+' is a number');
+			}
+		}	
+	}
+	
+</script>
+</body>
+</html>

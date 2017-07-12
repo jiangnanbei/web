@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		#div1{width: 100px;height: 100px;background: red;position: relative;}
+	</style>	
+</head>
+<body>
+	<div id="div1"></div>
+
+	<script type="text/javascript">
+		/**
+		 *普通方法变形
+		 *  尽量不要出现函数嵌套
+		 *  可以有全局变量
+		 *  把onload中不是赋值的语句放到单独的函数中
+		 */
+		var disX = null;
+		var disY = null;
+		var oDiv=null;
+
+		window.onload=function(){
+			
+			oDiv=document.getElementById('div1');
+			init();
+		}
+
+		function init(){
+			oDiv.onmousedown=fnDown;
+		}
+
+		function fnDown(ev){
+				var ev = ev || window.event;
+				disX = ev.clientX - oDiv.offsetLeft;
+				disY = ev.clientY - oDiv.offsetTop;	
+
+				document.onmousemove=fnMove;
+				document.onmouseup=fnUp;
+				return false;
+		}
+
+		function fnMove(ev){
+			var ev = ev || window.event;
+			oDiv.style.left = ev.clientX - disX + 'px';
+			oDiv.style.top = ev.clientY - disY + 'px';
+
+		}
+
+		function fnUp(){
+			document.onmousemove=null;
+			document.onmouseup=null;
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css"> p,ul{margin: 0;padding: 0} li{list-style: none;} body{background: #333; } #pic{width: 400px; height: 500px; position: relative; margin: 0 auto; background: url(images/loader_ico.gif)no-repeat center #fff; } #pic img{width: 400px; height: 500px; } #pic span{height: 25px; top: 0; line-height: 25px; } #pic p{height: 30px; bottom: 0; line-height: 30px; } #pic p,span{width: 400px; text-align: center; color: #fff; position: absolute; background: #000; } #pic ul{width: 40px; position: absolute; top: 0; right: -50px; } #pic li{width: 40px; height: 40px; margin-bottom: 4px; background: #666; } #pic .active{background: #fc3; } </style> </head>
+<body>
+<div id="pic">
+	<img src="">
+	<span>page is loading...</span>
+	<p>caption is loading...</p>
+	<ul></ul>
+</div>
+
+<script type="text/javascript">
+	window.onload=function(){
+		var oDiv=document.getElementById('pic');
+		var oImg=oDiv.getElementsByTagName('img')[0];
+		var oPage=oDiv.getElementsByTagName('span')[0];
+		var oCapt=oDiv.getElementsByTagName('p')[0];
+		var oUl=oDiv.getElementsByTagName('ul')[0];
+		var aLi=document.getElementsByTagName('li');
+
+		var arrUrl=['images/1.png','images/2.png','images/3.png','images/4.png'];
+		var arrText=['1.png','2.png','3.png','4.png'];
+		var num=0;
+		var oldLi=null;
+
+		for(var i=0;i<arrUrl.length;i++){
+			oUl.innerHTML+='<li></li>';
+		}
+		oldLi=aLi[num];
+		//initialization
+		oImg.src=arrUrl[num];
+		oPage.innerHTML=(1+num)+'/'+arrUrl.length;
+		oCapt.innerHTML=arrText[num];
+		aLi[num].className='active';
+
+		for(var i=0;i<aLi.length;i++){
+			aLi[i].index=i;
+			aLi[i].onclick=function(){
+				oImg.src=arrUrl[this.index];
+				oCapt.innerHTML=arrText[this.index];
+				oPage.innerHTML=(this.index+1)+'/'+arrUrl.length;
+
+				oldLi.className='';
+				oldLi=this;
+				this.className='active';
+			}
+		}
+
+
+	}	
+
+</script>
+</body>
+</html>

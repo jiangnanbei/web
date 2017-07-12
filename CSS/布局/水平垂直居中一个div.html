@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		/*利用 margin 负值，前提是要知道尺寸，兼容性最好，定位用 absolute*/
+		#center{
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin-left: -50px;
+			margin-top: -50px;
+		}
+	</style>
+</head>
+<body>
+<div id="center"></div>
+</body>
+</html>

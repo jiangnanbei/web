@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>自动生成10个LI-只能用定位实现（基础版）</title>
+	<style type="text/css">
+		#content{width: 500px;height: 500px;border: 1px solid;position: relative;}
+		#content div{width: 100px;height: 100px;background-color: pink;line-height: 100px;text-align: center;font-size: 40px;position: absolute;display: inline-block;}
+	</style>
+</head>
+<body>
+	<input type="button" value="生成" id="btn">
+
+	<div id="content">
+	</div>
+
+	<script type="text/javascript">
+	/*
+			向上 	
+			i	left	top
+			0	0		0
+			1	100		100
+			2	200		200
+			3	300		100
+			4	400		0
+			left = i*100
+			如果i<=2
+				top = i*100
+			否则
+				top = 400 - i*100
+				
+			向右	
+			i	left	top
+			0	400		0
+			1	300		100
+			2	200		200
+			3	300		300
+			4	400		400
+			top = i*100
+			如果i<=2
+				left = 400-i*100
+			否则
+				left = i*100
+				
+				
+			向下
+			i	left	top
+			0	0		400
+			1	100		300
+			2	200		200
+			3	300		300
+			4	400		400
+			left = i*100
+			如果i<=2
+				top = 400-i*100
+			否则
+				top = i*100
+				
+			向左
+			i	left	top
+			0	0		0
+			1	100		100
+			2	200		200
+			3	100		300
+			4	0		400
+			top = i*100
+			如果i<=2
+				left = i*100
+			否则
+				left = 400-i*100
+		*/
+		var btn = document.getElementById("btn");
+	    var content = document.getElementById("content");
+	    var str = "";
+	    var l = 0;
+	    var t = 0;
+	    var num = 0;
+	    btn.onclick = function(){
+	    	str = "";
+	    	for(var i=0;i<5;i++){
+	    		if(num == 0){
+					l = i*100;
+					if(i<=2){
+						t = i*100;
+					}else{
+						t = 400-i*100;
+					}
+					str += '<div style="left:'+l+'px;top:'+t+'px">'+ (i+1) +'</div>';
+				}
+	    		if(num == 1){
+	    			t = i*100;
+					if(i<=2){
+						l = 400-i*100;
+					}else{
+						l = i*100;
+					}
+					str += '<div style="left:'+l+'px;top:'+t+'px">'+(i+1)+'</div>';
+	    		}
+	    		if(num == 2){
+	    			l = i*100;
+					if(i<=2){
+						t = 400-i*100;
+					}else{
+						t = i*100;
+					}
+					str += '<div style="left:'+l+'px;top:'+t+'px">'+(i+1)+'</div>';
+	    		}
+	    		if(num == 3){
+	    			t = i*100;
+					if(i<=2){
+						l = i*100;
+					}else{
+						l = 400-i*100;
+					}
+					str += '<div style="left:'+l+'px;top:'+t+'px">'+(i+1)+'</div>';
+	    		}
+	    	}
+			num++;
+			num%=4;
+			content.innerHTML = str;
+	    }
+	</script>
+</body>
+</html>

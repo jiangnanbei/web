@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		*{margin: 0;padding: 0}
+		#box{
+			height: 100px;
+			width: 250px;
+			margin: 50px auto;
+		}
+		#box input[type=button]{
+			width: 20px;
+			height: 20px;
+		}
+
+		#box .backcolor{
+			background-color: red;
+		}
+		#container{
+			width: 250px;
+			height: 100px;
+		}
+
+		#container div{
+			width: 250px;
+			height: 100px;
+			border: 1px solid;
+			position: absolute;
+			display: none;
+		}
+
+		#container .active{
+			display: block;
+		}
+	</style>
+</head>
+<body>
+<div id="box">
+	<input type="button" value="1" class="backcolor">
+	<input type="button" value="2">
+	<input type="button" value="3">
+	<div id="container">
+		<div class="active">111</div>
+		<div>222</div>
+		<div>333</div>
+	</div>
+</div>
+	
+<script type="text/javascript">
+	/**
+	 * 变形方法:
+	 *   尽量不要出现函数嵌套
+	 *   可以有全局变量
+	 *   把 onload 中不是赋值的语句放到单独的函数中
+	 */
+
+	 //全局变量
+	var aBtn = null;
+	var oDiv = null;
+	var aCon = null;
+
+	window.onload = function(){
+		aBtn = document.getElementsByTagName('input');
+		oDiv = document.getElementById('container');
+		aCon = oDiv.getElementsByTagName('div');
+
+		init();
+	}
+
+	function init(){
+		for(var i=0; i<aBtn.length; i++){
+			aBtn[i].index = i;
+			aBtn[i].onclick = change;
+		}
+	}
+
+	function change(){
+		for(var i=0; i<aBtn.length; i++){
+			aBtn[i].className = '';
+			aCon[i].style.display = 'none';
+		}
+
+		this.className = 'backcolor';
+		aCon[this.index].style.display = 'block';
+	}
+
+</script>
+</body>
+</html>

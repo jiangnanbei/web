@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+
+	function createJS(sUrl){
+		var oScript = document.createElement('script');
+		oScript.type = 'text/javascript';
+		oScript.src = sUrl;
+		document.getElementsByTagName('head')[0].appendChild(oScript);
+	}
+	createJS('2.jsonp.js?callback=box');
+
+	function box(json){
+		alert(json.name);
+	}
+</script>
+</body>
+</html>

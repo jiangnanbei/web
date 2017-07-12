@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<input type="button" value="自动生成5条新闻" id="btn">
+	<ul id="list"></ul>
+
+	<script type="text/javascript">
+		window.onload=function(){
+			var oBtn=document.getElementById('btn');
+			var oUl=document.getElementById('list');
+
+			var arr=[
+			'美国出现弹劾特朗普论调 外媒：距其上任还不到20天',
+			'蔡英文将提两岸新表述？国台办：一中是核心认知',
+			'韩媒：韩国将调研中国“反制”萨德是否违反世贸规则',
+			'国民党陷黑帮入党丑闻 民进党官员：大陆“渗透”',
+			'甘肃明长城遗址遭农田“啃噬” 有的成羊圈院墙'
+			];
+
+			//针对每次点击都会再次产生相同的五条新闻，给怎么解决？
+			
+			//1.先清空，再生成(我们以后要做的很多东西都会用到这个思路，但是性能会差一点)
+			//2.用一个开关来解决
+			
+			var onOff=true;
+
+			oBtn.onclick=function(){
+
+				if(onOff){
+
+					for(var i=0;i<arr.length;i++){
+						oUl.innerHTML += '<li>'+arr[i]+'</li>';
+					}
+
+					onOff=false;
+				};
+			}
+
+		}
+	</script>
+</body>
+</html>

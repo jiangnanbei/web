@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Image Gallery</title>
+	<meta charset="utf-8">
+	<style>
+		body{
+			font-family: "Helvetica","Arial",serif;
+			color: #333;
+			background-color: #ccc;
+			margin: 1em 10%;
+		}
+		h1 {
+			color: #333;
+			background-color: transparent;
+		}
+		a {
+			color: #c60;
+			background-color: transparent;
+			font-weight: bold;
+			text-decoration: none;
+		}
+		ul {
+			padding: 0;
+		}
+		li {
+			float: left;
+			padding: 1em;
+			list-style: none;
+		}
+		img {
+			display: block;
+			clear: both;
+		}
+		li img{
+			width: 40px;
+			height: 40px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Snapshots</h1>
+	<ul id="imagegallery">
+		<li>
+			<!-- 此时连接上有两个行为，一个是 showPic ，另一个就是连接的默认行为，我们可以使用return false 阻止事件的默认行为 -->
+			<a href="images/fireworks.gif" title="A fireworks display"; ><img src="images/fireworks.gif" alt="Fire"></a>
+		</li>
+		<li>
+			<a href="images/coffee.gif" title="A cup of black coffee" ><img src="images/coffee.gif" alt="coffee"></a>
+		</li>
+		<li>
+			<a href="images/rose.gif" title="A red rose" >Rose</a>
+		</li>
+		<li>
+			<a href="images/bigben.gif" title="The famous clock" >Big Ben</a>
+		</li>
+	</ul>
+	<img src="images/hello.gif" id="placeholder" alt="my image gallery">
+	<p id="description">Choose an image!</p>
+
+	<script type="text/javascript">
+
+		window.onload = addLoadEvent();
+
+		function showPic(whichpic){
+			if(!document.getElementById('placeholder')) return false;
+		    var source = whichpic.getAttribute("href");
+		    var placeholder = document.getElementById('placeholder');
+		    if(placeholder.nodeName != 'IMG') return false;
+		    placeholder.setAttribute("src",source);
+
+			if(!document.getElementById('description')) {
+				var text = whichpic.getAttribute('title') ? whichpic.getAttribute('title') : "";
+		        var description = document.getElementById('description');
+		        if (description.firstChild.nodeType == 3) {
+    				description.firstChild.nodeValue = text;
+				}
+		    }
+		    return true;
+		}
+
+		function prepareGallery() {
+			if(!document.getElementsByTagName) return false;
+			if(!document.getElementById) return false;
+			if(!document.getElementById('imagegallery')) return false;
+			
+			var gallery = document.getElementById('imagegallery');
+			var links = gallery.getElementsByTagName('a');
+			for(var i=0; i<links.length; i++) {
+				links[i].onclick = function() {
+					return !showPic(this);
+					// 等价于
+					// if (showPic(this)) {
+					// 	return false;
+					// } else {
+					// 	return true;
+					// }
+					// 等价于
+					// return showPic(this) ? false : true;
+				}
+			}
+		}
+
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function() {
+					oldonload();
+					func();
+				}
+			}
+		}
+
+		addLoadEvent(prepareGallery);
+		addLoadEvent(showPic);
+
+	</script>
+</body>
+</html>

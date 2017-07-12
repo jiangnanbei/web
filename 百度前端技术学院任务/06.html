@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style media="screen">
+	ul{margin: 0;padding: 0;}
+	ul{list-style: none;}
+	ul li{float: left;margin-left: 10px;}
+	.select{background-color: red;}
+	</style>
+</head>
+<body>
+	<textarea name="name" rows="4" cols="40" id="input"></textarea>
+	<input type="button" name="" value="input" id="btn-input">
+	<input type="text" id="search-input">
+	<input type="button" name="" value="search" id="btn-search">
+	<ul id="display"></ul>
+</body>
+<script type="text/javascript">
+var doc = document;
+var oLi = doc.createElement('li');
+var arr = [];
+
+var $ = function(id){
+	return "string" == typeof id ? doc.getElementById(id) : id;
+}
+
+function input() {
+	var oFrag = document.createDocumentFragment();
+	// 使用正则表达式取出需要的值
+	arr = $("input").value.replace(/[^0-9a-zA-Z\u4e00-\u9fa5]+/g, " ").split(" ");
+	// 把符合要求的值放入文档
+	arr.map( function( val, key ) {
+		var newLi = oLi.cloneNode(true);
+		newLi.innerText = val;
+		oFrag.appendChild( newLi );
+	})
+	$("display").appendChild( oFrag );
+}
+
+// 搜索匹配功能
+function search() {
+	var ali = $('display').getElementsByTagName('li');
+	var reg = new RegExp($('search-input').value,"g");
+	for(var i=0,len=ali.length; i<len; i++) {
+		ali[i].innerHTML = ali[i].innerHTML.replace(reg,"<span class='select'>" + $('search-input').value + "</span>");
+	}
+}
+
+$("btn-input").onclick = input;
+$("btn-search").onclick = search;
+</script>
+</html>

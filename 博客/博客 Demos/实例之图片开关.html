@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		li{width: 114px; height: 140px; list-style: none; background: url(images/normal.png); float: left; margin-left: 20px; } </style>
+</head>
+<body>	
+	<ul> <li></li> <li></li> <li></li> </ul> 
+	<script type="text/javascript">
+		window.onload=function(){
+			var aLi=document.getElementsByTagName('li');
+
+			for(var i=0;i<aLi.length;i++){
+				
+				aLi[i].onOff=true;
+				aLi[i].onclick=function(){
+					if(this.onOff){
+						this.style.background='url(images/active.png)';
+						this.onOff=false;
+					}else{
+						this.style.background='url(images/normal.png)';
+						this.onOff=true;
+					}
+					
+				}
+				
+			}
+		}
+	</script>
+</body>
+</html>

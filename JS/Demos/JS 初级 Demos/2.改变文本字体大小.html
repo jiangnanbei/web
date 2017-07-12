@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+
+	<input type="button" value="-" id="down">
+	<input type="button" value="+" id="up">
+	<p id="p1">HTML 代码是顺序执行的，一份无任何 CSS 样式的 HTML 代码最终呈现出的页面是根据元素出现的顺序和类型排列的。块级元素就从上到下排列，遇到内联元素则从左到右排列。这种无样式的情况下，元素的分布叫普通流，元素出现的位置应该叫正常位置，同时所有元素会在页面上占据一个空间，空间大小由其盒模型决定。</p>
+
+	<script type="text/javascript">
+		var doc =document;
+
+	  	var $ = function(id){
+	    	return "string" == typeof id ? doc.getElementById(id) : id;
+		}
+		
+		var num = 16;
+		var font = $('p1').style.fontSize;
+
+		$('up').onclick=function(){
+			num++;
+			font = num + 'px';
+			if (font >= 20+'px') {
+				font = 20+'px';
+			}
+			// 这个语句是不是有办法改进
+			$('p1').style.fontSize = font;
+		}
+
+		$('down').onclick=function(){
+			num--;
+			font = num+'px';
+			// 这个语句是不是有办法改进
+			$('p1').style.fontSize = font;
+		}	
+
+
+	</script>
+</body>	
+</html>

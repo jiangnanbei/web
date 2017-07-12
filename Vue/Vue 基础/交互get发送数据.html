@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+
+    </style>
+    <script src="vue.js"></script>
+    <script src="vue-resource.js"></script>
+    <script>
+        window.onload=function(){
+            new Vue({
+                el:'body',
+                data:{
+
+                },
+                methods:{
+                    get:function(){
+                        this.$http.get('get.php',{
+                            a:1,
+                            b:2
+                        }).then(function(res){
+                            alert(res.data);
+                        },function(res){
+                            alert(res.status);
+                        });
+                    }
+                }
+            });
+        };
+    </script>
+</head>
+<body>
+    <input type="button" value="按钮" @click="get()">
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		#div1{width: 100px;height: 100px;background: red;position: relative;}
+	</style>	
+</head>
+<body>
+	<div id="div1"></div>
+
+	<script type="text/javascript">
+		window.onload=function(){
+			var oDiv=document.getElementById('div1');
+
+			var disX = 0;
+			var disY = 0;
+
+			//pay attention to the hierarchical relationship(层次关系) between these funcitons.
+			//编写拖拽事件的函数顺序很重要.
+			oDiv.onmousedown=function(ev){
+				var ev = ev || window.event;
+
+				disX = ev.clientX - oDiv.offsetLeft;
+				disY = ev.clientY - oDiv.offsetTop;
+
+
+				document.onmousemove=function(ev){
+					var ev = ev || window.event;
+					oDiv.style.left = ev.clientX - disX + 'px';
+					oDiv.style.top = ev.clientY - disY + 'px';
+
+				}
+
+				document.onmouseup=function(){
+					document.onmousemove=null;
+					document.onmouseup=null;
+				}
+			}
+
+			return false;
+
+		}
+	</script>
+</body>
+</html>

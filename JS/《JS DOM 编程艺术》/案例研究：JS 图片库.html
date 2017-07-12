@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Image Gallery</title>
+	<meta charset="utf-8">
+	<style>
+		body{
+			font-family: "Helvetica","Arial",serif;
+			color: #333;
+			background-color: #ccc;
+			margin: 1em 10%;
+		}
+		h1 {
+			color: #333;
+			background-color: transparent;
+		}
+		a {
+			color: #c60;
+			background-color: transparent;
+			font-weight: bold;
+			text-decoration: none;
+		}
+		ul {
+			padding: 0;
+		}
+		li {
+			float: left;
+			padding: 1em;
+			list-style: none;
+		}
+		img {
+			display: block;
+			clear: both;
+		}
+	</style>
+</head>
+<body>
+	<h1>Snapshots</h1>
+	<ul>
+		<li>
+			<!-- 此时连接上有两个行为，一个是 showPic ，另一个就是连接的默认行为，我们可以使用return false 阻止事件的默认行为 -->
+			<a href="images/fireworks.gif" target="_self" onclick="showPic(this) ; return false;" title="A fireworks display"; >Fireworks</a>
+		</li>
+		<li>
+			<a href="images/coffee.gif" target="_self" title="A cup of black coffee" onclick="showPic(this); return false;">Coffee</a>
+		</li>
+		<li>
+			<a href="images/rose.gif" target="_self" title="A red rose" onclick="showPic(this); return false;">Rose</a>
+		</li>
+		<li>
+			<a href="images/bigben.gif" target="_self" title="The famous clock" onclick="showPic(this); return false;">Big Ben</a>
+		</li>
+	</ul>
+	<img src="images/hello.gif" target="_self" id="placeholder" alt="my image gallery">
+	<p id="description">Choose an image!</p>
+
+	<script type="text/javascript">
+		function showPic(whichpic){
+			var source = whichpic.getAttribute('href');
+			var placeholder = document.getElementById('placeholder');
+			placeholder.setAttribute('src',source);
+
+			var text = whichpic.getAttribute('title');
+			var description = document.getElementById('description');
+			description.firstChild.nodeValue = text;
+		}
+
+
+	</script>
+</body>
+</html>

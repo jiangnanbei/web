@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>send msg</title>
+	<style>
+		body,p,li,ul{margin: 0;padding: 0;}
+		#box{width: 350px;height: 448px;border: 1px solid;box-sizing: border-box;margin: 20px auto;position: relative;}
+		.msg{width: 348px;height: 416px;background-color: red;background-color: #ccc;filter:alpha(opacity=60);opacity: 0.3;border-bottom: 1px solid;overflow: auto;	 }
+		.send{position: absolute;bottom: 0;line-height: 30px;text-align: center;height: 30px;width: 100%;}
+		.send .name{margin-right: 15px;}
+		.send .name:hover{cursor: pointer;}
+		.send .btn{margin-left: 15px;}
+		.attach{margin-right: 0;}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div class="msg">
+			<ul class="msgBox"></ul>
+		</div>
+		<div class="send" style="font-size: 0;">
+			<span class="name" style="font-size: 14px;">张三</span>
+			<input type="text" class="input">
+			<input type="button" value="submit" class="btn" id="bot">
+		</div>
+	</div>
+
+	<script type="text/javascript" src="my.js"></script>
+	<script type="text/javascript">
+		// 当信息溢出时，自动加载最新信息的功能，没有实现
+		var oMsg = getClassName('msgBox');
+		var oBtn = getClassName('btn');
+		var oText = getClassName('input');
+		var oName = getClassName('name');
+		var onoff = true;
+
+		oName.onclick = function() {
+			if(onoff) {
+				oName.innerHTML = '李四';
+			} else {
+				oName.innerHTML = '张三';
+			}
+
+			onoff = !onoff;
+		}
+		
+		oBtn.onclick = function() {
+			if(oText.value == '') {
+				return false;
+			} else {
+				if(onoff) {
+					oMsg.innerHTML += '<li style="list-style:none;text-align: left;position:relative;bottom:0;padding-left:20px;">' + '张三' + ':' + oText.value + '</li>'; 
+				} else {
+					oMsg.innerHTML += '<li style="list-style:none;text-align: right;position:relative;bottom:0;padding-right:20px;">' + oText.value + ':' + '李四' + '</li>'; 
+				}
+				oText.value = '';
+			}
+		}
+	</script>
+</body>
+</html>

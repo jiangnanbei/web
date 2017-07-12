@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Explaining the Document Object Model</title>
+    <style>
+      body {font-family: "Helvetica","Arial",sans-serif; font-size: 10pt; } abbr {text-decoration: none; border: 0; font-style: normal; }
+    </style>
+</head>
+<body>
+  <ul id="navigation">
+    <li><a href="index.html" accesskey="1">Home</a></li>
+    <li><a href="search.html" accesskey="4">Search</a></li>
+    <li><a href="contact.html" accesskey="0">Contact</a></li>
+  </ul>
+  <h1>What is the Document Object Model?</h1>
+  <p>
+The <abbr title="World Wide Web Consortium">W3C</abbr> defines
+the <abbr title="Document Object Model">DOM</abbr> as:
+  </p>
+  <blockquote cite="http://www.w3.org/DOM/">
+    <p>
+A platform- and language-neutral interface that will allow programs
+and scripts to dynamically access and update the
+content, structure and style of documents.
+    </p>
+  </blockquote>
+  <p>
+It is an <abbr title="Application Programming Interface">API</abbr>
+that can be used to navigate <abbr title="HyperText Markup Language">
+HTML</abbr> and <abbr title="eXtensible Markup Language">XML
+</abbr> documents.
+  </p>
+
+<script type="text/javascript">
+function addLoadEvent(func) {
+  var oldonload = window.onload;
+  if (typeof window.onload != 'function') {
+    window.onload = func;
+  } else {
+    window.onload = function() {
+      oldonload();
+      func();
+    }
+  }
+} 
+
+function displayAccesskeys() {
+  if (!document.getElementsByTagName || !document.createElement || !document.createTextNode) return false;
+  // get all the links in the document
+  var links = document.getElementsByTagName("a");
+  // create an array to store the accesskeys
+  var akeys = new Array();
+  // loop through the links
+  for (var i=0; i<links.length; i++) {
+    var current_link = links[i];
+  // if there is no accesskey attribute, continue the loop
+    if (current_link.getAttribute("accesskey") == null) continue;
+  // get the value of the accesskey
+    var key = current_link.getAttribute("accesskey");
+  // get the value of the link text
+    var text = current_link.lastChild.nodeValue;
+  // add them to the array
+    akeys[key] = text;
+  }
+  // create the list
+  var list = document.createElement("ul");
+  // loop through the accesskeys
+  for (key in akeys) {
+    var text = akeys[key];
+  //  create the string to put in the list item
+    var str = key + " : "+text;
+  // create the list item
+    var item = document.createElement("li");
+    var item_text = document.createTextNode(str);
+    item.appendChild(item_text);
+  // add the list item to the list
+    list.appendChild(item);
+  }
+  // create a headline
+  var header = document.createElement("h3");
+  var header_text = document.createTextNode("Accesskeys");
+  header.appendChild(header_text);
+  // add the headline to the body
+  document.body.appendChild(header);
+  // add the list to the body
+  document.body.appendChild(list);
+}
+
+addLoadEvent(displayAbbreviations);
+
+</script>
+</body>
+</html>

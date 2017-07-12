@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.large{font-size: 1.2em;}
+		.narrow{font-size: 0.5em;}
+		.default{}
+		.selected{font-weight: bold;color: red;}
+		.switcher{background-color: #ccc;width: 350px;}
+		.hidden{display: none;}
+	</style>
+</head>
+<body>
+	<h1>样式转换器</h1>
+	<p>利用事件的执行上下文可以大大减少需要编写的代码量</p>
+	<p>toggleClass()方法可以相应的类是否存在而自动添加和删除类</p>
+	<p>.click(function(){})是时间的简写形式</p>
+
+	<div id="switcher" class="switcher">
+		<h3>style switcher</h3>
+		<button id="switcher-default">default</button>
+		<button id="switcher-narrow">narrow</button>
+		<button id="switcher-large">large</button>
+	</div>
+	<script src="jquery.js"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$('#switcher-default').addClass('selected');
+			$('#switcher button').click(function(){
+				var bodyClass = this.id.split('-')[1];
+				$('body').removeClass().addClass(bodyClass);
+				$('#switcher button').removeClass('selected');
+				$(this).addClass('selected');
+			})
+
+			// 隐藏特性
+			$('#switcher h3').click(function(){
+				$('#switcher button').toggleClass('hidden');
+			})
+		});
+	</script>
+</body>
+</html>
