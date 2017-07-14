@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<style>
+	.test_box {
+	    width: 400px; 
+	    min-height: 120px; 
+	    max-height: 300px;
+	    _height: 120px; 
+	    margin-left: auto; 
+	    margin-right: auto; 
+	    padding: 3px; 
+	    outline: 0; 
+	    border: 1px solid #a0b3d6; 
+	    font-size: 12px; 
+	    word-wrap: break-word;
+	    overflow-x: hidden;
+	    overflow-y: auto;
+	    -webkit-user-modify: read-write-plaintext-only;
+	}
+</style>
+</head>
+<body>
+<div class="test_box" contenteditable="true"><br /></div>	
+<script type="text/javascript">
+// if (typeof document.webkitHidden == "undefined") {
+// 	// 非chrome浏览器阻止粘贴
+// 	box.onpaste = function() {
+// 	    return false;
+// 	}
+// }
+</script>
+</body>
+</html>
