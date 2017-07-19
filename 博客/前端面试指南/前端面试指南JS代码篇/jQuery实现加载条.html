@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	.loading{
+		background: #FF6100;
+		height: 5px;
+		position: fixed; 设置进度条根据屏幕滚动
+		top: 0;
+		z-index: 9999;
+	}
+	</style>
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+</head>
+<body>
+
+	<!-- 首先我们要知道的是，目前没有任何浏览器可以直接获取正在加载对象的大小。所以我们无法通过数据大小来实现0-100%的加载显示过程。 -->
+
+	<!-- 因此我们需要通过html代码逐行加载的特性，在整页代码的若干个跳跃行数中设置节点，进行大概的模糊进度反馈来实现进度加载的效果。大致意思是：页面每加载到指定区域，则返回(n)%的进度结果，通过设置多个节点，来达到一步一步显示加载进度的目的。 -->
+
+	<!-- 假如有一个页面，按区块分为页头、左侧内容、右边侧栏、页脚四部分，我们把这四部分作为四个节点，当页面加载每一个节点后，设置大概加载百分比，页面结构如下： -->
+
+	<!-- 接下来，我们要在每个节点后面加上进度动画，使用jQuery来实现。 -->
+	<div class="loading"></div>
+	<header id="header"></header>
+	<script>
+		// 第一个进度节点
+		$('.loading').animate({width:'33%'},50);
+	</script>
+	<article id="content">
+		<div class="mainpage"></div>
+		<script>
+			// 第一个进度节点
+			$('.loading').animate({width:'55%'},50);
+		</script>
+		<div class="sider"></div>
+			<script>
+				// 第一个进度节点
+				$('.loading').animate({width:'80%'},50);
+			</script>
+	</article>
+	<footer id="footer"></footer>
+	<script>
+		// 第一个进度节点
+		$('.loading').animate({width:'80%'},50);
+		// 当进度条达到100%后，页面加载完成，最后还有一步要做的就是隐藏进度条。
+		$(document).ready(function(){ 
+		 $('.loading').fadeOut();  
+		});
+	</script>
+
+
+</body>
+</html>
